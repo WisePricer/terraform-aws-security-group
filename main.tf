@@ -5,14 +5,16 @@
 # https://www.terraform.io/docs/providers/aws/r/security_group_rule.html
 
 module "enabled" {
-  source  = "devops-workflow/boolean/local"
-  version = "0.1.1"
+  #source  = "devops-workflow/boolean/local"
+  #version = "0.1.1"
+  source  = "git::https://github.com/WisePricer/terraform-local-boolean.git?ref=tags/v0.1.1"
   value   = "${var.enabled}"
 }
 
 module "label" {
-  source        = "devops-workflow/label/local"
-  version       = "0.1.2"
+  #source        = "devops-workflow/label/local"
+  #version       = "0.1.2"
+  source        = "git::https://github.com/WisePricer/terraform-local-boolean.git?ref=tags/v0.1.3"
   organization  = "${var.organization}"
   name          = "${var.name}"
   namespace-env = "${var.namespace-env}"
