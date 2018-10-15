@@ -41,8 +41,10 @@ variable "rules" {
     # ELK - Elasticsearch
     elasticsearch-rest-tcp = [9200, 9200, "tcp", "Elasticsearch REST interface"]
     elasticsearch-java-tcp = [9300, 9300, "tcp", "Elasticsearch Java interface"]
+
     # ELK - Kibana
     kibana-tcp = [9000, 9000, "tcp", "Kibana"]
+
     # ELK - Logstash
     logstash-tcp = [5043, 5044, "tcp", "Logstash"]
 
@@ -67,7 +69,7 @@ variable "rules" {
     memcached-tcp = [11211, 11211, "tcp", "Memcached"]
 
     # MongoDB
-    mongodb-tcp   = [27017, 27017, "tcp", "MongoDB"]
+    mongodb-tcp = [27017, 27017, "tcp", "MongoDB"]
 
     # MySQL
     mysql-tcp = [3306, 3306, "tcp", "MySQL/Aurora"]
@@ -97,6 +99,10 @@ variable "rules" {
 
     # Redis
     redis-tcp = [6379, 6379, "tcp", "Redis"]
+
+    #RabbitMQ
+    rabbitmq_mgnt  = [15672, 15672, "tcp", "RabbitMQ Management"]
+    rabbitmq_nodes = [5672, 5672, "tcp", "RabbitMQ Nodes"]
 
     # SSH
     ssh-tcp = [22, 22, "tcp", "SSH"]
@@ -238,6 +244,12 @@ variable "auto_groups" {
 
     postgresql = {
       ingress_rules     = ["postgresql-tcp"]
+      ingress_with_self = ["all-all"]
+      egress_rules      = ["all-all"]
+    }
+
+    rabbitmq = {
+      ingress_rules     = ["rabbitmq_nodes", "rabbitmq_mgnt"]
       ingress_with_self = ["all-all"]
       egress_rules      = ["all-all"]
     }
